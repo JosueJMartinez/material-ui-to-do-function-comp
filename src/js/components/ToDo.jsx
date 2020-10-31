@@ -7,6 +7,9 @@ import Grid from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import ToDoList from "./ToDoComponents/ToDoList";
+import ToDoForm from "./ToDoComponents/ToDoForm";
+import Divider from "@material-ui/core/Divider";
+
 const useStyles = makeStyles(theme => ({
   root: {
     padding: "0",
@@ -17,6 +20,12 @@ const useStyles = makeStyles(theme => ({
   appBar: {
     height: "64px",
   },
+	main:{
+		margin:'auto',
+		marginTop:'30px',
+		width: "100%",
+    maxWidth: 360,
+	}
 }));
 
 export default function ToDo() {
@@ -46,8 +55,10 @@ export default function ToDo() {
           <Typography color="inherit">ToDo List React Hooks</Typography>
         </Toolbar>
       </AppBar>
-      Tootl
-      <ToDoList todos={todos} />
+			<Paper className={classes.main}> 
+				<ToDoForm />
+				<ToDoList todos={todos} />
+			</Paper>
     </Paper>
   );
 }
