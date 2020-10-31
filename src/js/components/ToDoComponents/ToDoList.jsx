@@ -9,7 +9,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import Paper from "@material-ui/core/Paper";
 
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,52 +21,40 @@ export default function ToDoList(props) {
   const { todos } = props;
   const classes = useStyles();
 
-  const listToDo = () => {
+  const listToDos = () => {
+    console.log(todos);
     return todos.map(item => {
-      
       const { content, id, isScratched } = item;
       const labelId = `checkbox-list-label-${content}`;
 
       return (
-				
-				<>
-					<ListItem
-						key={id}
-						role={undefined}
-						dense
-						button
-					
-					>
-						<ListItemIcon>
-							<Checkbox
-								edge="start"
-								
-								tabIndex={-1}
-								disableRipple
-								inputProps={{
-									"aria-labelledby": labelId,
-								}}
-							/>
-						</ListItemIcon>
-						<ListItemText id={labelId} primary={content} />
-						<ListItemSecondaryAction>
-							<IconButton edge="end" aria-label="delete">
-								<DeleteIcon />
-							</IconButton>
-						</ListItemSecondaryAction>
-
-					</ListItem>
-					
-				</>
+        <ListItem
+          className={classes.root}
+          key={id}
+          role={undefined}
+          dense
+          button
+        >
+          <ListItemIcon>
+            <Checkbox
+              edge="start"
+              tabIndex={-1}
+              disableRipple
+              inputProps={{
+                "aria-labelledby": labelId,
+              }}
+            />
+          </ListItemIcon>
+          <ListItemText id={labelId} primary={content} />
+          <ListItemSecondaryAction>
+            <IconButton edge="end" aria-label="delete">
+              <DeleteIcon />
+            </IconButton>
+          </ListItemSecondaryAction>
+        </ListItem>
       );
     });
   };
 
-  return( 
-		
-			<List>
-				
-				{listToDo()}
-			</List>
-		)
+  return <List>{listToDos()}</List>;
 }

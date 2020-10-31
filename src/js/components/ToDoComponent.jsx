@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
+import { Typography, Paper, AppBar, Toolbar } from "@material-ui/core";
 import Grid from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
@@ -20,15 +17,18 @@ const useStyles = makeStyles(theme => ({
   appBar: {
     height: "64px",
   },
-	main:{
-		margin:'auto',
-		marginTop:'30px',
-		width: "100%",
+  main: {
+    margin: "auto",
+    marginTop: "30px",
+    width: "100%",
     maxWidth: 360,
-	}
+  },
+  todoTitle: {
+    padding: "10px",
+  },
 }));
 
-export default function ToDo() {
+export default function ToDoComponent() {
   const classes = useStyles();
 
   const initialValues = [
@@ -48,17 +48,32 @@ export default function ToDo() {
 
   const { todos, isOpen } = state;
 
+  const addItem = item => {
+    setState(prevState => {
+      const todos = prevState.todos;
+      todos.push(item);
+      return { ...prevState, todos };
+    });
+  };
+
+  console.log(todos);
+
   return (
     <Paper className={classes.root} elevation={3}>
       <AppBar className={classes.appBar} color="primary" position="static">
         <Toolbar>
-          <Typography color="inherit">ToDo List React Hooks</Typography>
+          <Typography color="inherit" variant="h4">
+            Grocery List
+          </Typography>
         </Toolbar>
       </AppBar>
-			<Paper className={classes.main}> 
-				<ToDoForm />
-				<ToDoList todos={todos} />
-			</Paper>
+      <Paper className={classes.main}>
+        <Typography variant="h5" className={classes.todoTitle}>
+          Need to Buy
+        </Typography>
+        <ToDoForm addItem={addItem} />
+        <ToDoList todos={todos} />
+      </Paper>
     </Paper>
   );
 }
