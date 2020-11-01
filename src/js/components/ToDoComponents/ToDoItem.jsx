@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   ListItem,
@@ -6,15 +6,18 @@ import {
   ListItemText,
   IconButton,
 } from "@material-ui/core";
-
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
+
+import EditToDo from "./EditToDo";
+import useToggleState from "../../hooks/useToggleState";
 
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
     paddingTop: "12px",
     paddingBottom: "12px",
+    height: "4rem",
   },
   listItemText: {
     textDecoration: isCompleted => (isCompleted ? "line-through" : ""),
@@ -27,13 +30,34 @@ export default function ToDoItem({
   isCompleted,
   deleteItem,
   toggleItem,
+  editItem,
 }) {
   const classes = useStyles(isCompleted);
   const labelId = `checkbox-list-label-${content}`;
 
-  const handleEditClick = e => {
-    console.log("edit");
+  const [toggleEditBtn, setToggleEditBtn] = useToggleState(false);
+
+  const handleEditItem = editTodo => {
+    setToggleEditBtn();
+    editItem(editTodo);
   };
+
+  const toggleEditForm = toggleEditBtn ? (
+    <ListItemText>
+      <EditToDo
+        todo={{ content, id, isCompleted }}
+        editItem={handleEditItem}
+      />
+    </ListItemText>
+  ) : (
+    <ListItemText
+      id={labelId}
+      onClick={() => toggleItem(id)}
+      className={classes.listItemText}
+    >
+      {content}
+    </ListItemText>
+  );
 
   return (
     <ListItem
@@ -41,22 +65,20 @@ export default function ToDoItem({
       key={id}
       role={undefined}
       dense
-      button
+      button={!toggleEditBtn}
     >
-      <ListItemText
-        id={labelId}
-        primary={content}
-        onClick={() => toggleItem(id)}
-        className={classes.listItemText}
-      />
+      {toggleEditForm}
+
       <ListItemSecondaryAction>
-        <IconButton
-          edge="start"
-          aria-label="edit"
-          onClick={handleEditClick}
-        >
-          <EditIcon />
-        </IconButton>
+        {!toggleEditBtn && (
+          <IconButton
+            edge="start"
+            aria-label="edit"
+            onClick={setToggleEditBtn}
+          >
+            <EditIcon />
+          </IconButton>
+        )}
         <IconButton
           edge="end"
           aria-label="delete"

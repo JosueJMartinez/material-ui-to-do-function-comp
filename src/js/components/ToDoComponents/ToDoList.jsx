@@ -14,7 +14,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ToDoList({ todos, deleteItem, toggleItem }) {
+export default function ToDoList({
+  todos,
+  deleteItem,
+  toggleItem,
+  editItem,
+}) {
   const classes = useStyles();
 
   const listToDos = () => {
@@ -25,6 +30,7 @@ export default function ToDoList({ todos, deleteItem, toggleItem }) {
           key={item.id}
           deleteItem={deleteItem}
           toggleItem={toggleItem}
+          editItem={editItem}
         />
       );
     });
