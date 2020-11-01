@@ -21,10 +21,13 @@ export default function ToDoList(props) {
   const { todos } = props;
   const classes = useStyles();
 
+  const handleDeleteClick = id => {
+    console.log(id);
+  };
+
   const listToDos = () => {
-    console.log(todos);
     return todos.map(item => {
-      const { content, id, isScratched } = item;
+      const { content, id, isCompleted } = item;
       const labelId = `checkbox-list-label-${content}`;
 
       return (
@@ -46,7 +49,7 @@ export default function ToDoList(props) {
             />
           </ListItemIcon>
           <ListItemText id={labelId} primary={content} />
-          <ListItemSecondaryAction>
+          <ListItemSecondaryAction onClick={() => handleDeleteClick(id)}>
             <IconButton edge="end" aria-label="delete">
               <DeleteIcon />
             </IconButton>
@@ -56,5 +59,9 @@ export default function ToDoList(props) {
     });
   };
 
-  return <List>{listToDos()}</List>;
+  return (
+    <Paper elevation={3}>
+      <List>{listToDos()}</List>;
+    </Paper>
+  );
 }

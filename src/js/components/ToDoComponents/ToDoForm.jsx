@@ -1,22 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { v4 as uuid } from "uuid";
 
+import useInputState from "../../hooks/useInputState";
+
 const useStyles = makeStyles(theme => ({ root: { width: "100%" } }));
 
-export default function ToDoForm(props) {
+export default function ToDoForm({ addItem }) {
   const classes = useStyles();
 
-  const [input, setInput] = useState("");
-
-  const { addItem } = props;
+  const [input, setInput, reset] = useInputState("");
 
   const handleSubmit = e => {
     e.preventDefault();
-    const newItem = { content: input, id: uuid(), isScratched: false };
+    const newItem = { content: input, id: uuid(), isCompleted: false };
     addItem(newItem);
-    setInput("");
+    reset();
   };
 
   return (

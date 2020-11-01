@@ -7,10 +7,8 @@ import ToDoComponent from "./components/ToDoComponent";
 function App() {
   return (
     <div className="App">
-      <>
-        <CssBaseline />
-        <ToDoComponent />
-      </>
+      <CssBaseline />
+      <ToDoComponent />
     </div>
   );
 }
