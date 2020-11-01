@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Typography, Paper, AppBar, Toolbar } from "@material-ui/core";
+import { Typography, AppBar, Toolbar } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
+
 import ToDoList from "./ToDoComponents/ToDoList";
 import ToDoForm from "./ToDoComponents/ToDoForm";
-import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,12 +28,12 @@ export default function ToDoComponent() {
   const classes = useStyles();
 
   const initialValues = [
-    { content: "test here", id: "asdghheruiwrh", isScratched: false },
-    { content: "another test", id: "asddghheruiwrh", isScratched: false },
+    { content: "test here", id: "asdghheruiwrh", isCompleted: true },
+    { content: "another test", id: "asddghheruiwrh", isCompleted: false },
     {
       content: "and another one",
       id: "asgdghheruiwrh",
-      isScratched: false,
+      isCompleted: false,
     },
   ];
 
@@ -45,6 +44,15 @@ export default function ToDoComponent() {
 
   const { todos, isOpen } = state;
 
+  const [isComplete, setIsComplete] = useState(false);
+
+  const toggleItem = id => {
+    const todos = state.todos.map(item =>
+      item.id === id ? { ...item, isCompleted: !item.isCompleted } : item
+    );
+    setState(prevState => ({ ...prevState, todos }));
+  };
+
   const addItem = item => {
     setState(prevState => {
       const { todos } = prevState;
@@ -54,20 +62,16 @@ export default function ToDoComponent() {
   };
 
   const deleteItem = id => {
-    setState(prevState => {
-      const todos = prevState.todos.filter(todo => todo.id !== id);
-      return { ...prevState, todos };
-    });
+    const todos = state.todos.filter(todo => todo.id !== id);
+    setState(prevState => ({ ...prevState, todos }));
   };
-
-  console.log(todos);
 
   return (
     <div className={classes.root}>
       <AppBar className={classes.appBar} color="primary" position="static">
         <Toolbar>
           <Typography color="inherit" variant="h4">
-            Grocery List
+            Oh No another list!!!
           </Typography>
         </Toolbar>
       </AppBar>
@@ -80,13 +84,12 @@ export default function ToDoComponent() {
           lg={4}
           className={classes.mainComponent}
         >
-          <Paper elevation={3}>
-            <Typography variant="h5" className={classes.todoTitle}>
-              Need to Buy
-            </Typography>
-            <ToDoForm addItem={addItem} />
-          </Paper>
-          <ToDoList todos={todos} deleteItem={deleteItem} />
+          <ToDoForm addItem={addItem} />
+          <ToDoList
+            todos={todos}
+            deleteItem={deleteItem}
+            toggleItem={toggleItem}
+          />
         </Grid>
       </Grid>
     </div>

@@ -1,11 +1,13 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
+import { TextField, Paper } from "@material-ui/core";
 import { v4 as uuid } from "uuid";
 
 import useInputState from "../../hooks/useInputState";
 
-const useStyles = makeStyles(theme => ({ root: { width: "100%" } }));
+const useStyles = makeStyles(theme => ({
+  root: { width: "100%" },
+}));
 
 export default function ToDoForm({ addItem }) {
   const classes = useStyles();
@@ -20,20 +22,22 @@ export default function ToDoForm({ addItem }) {
   };
 
   return (
-    <form
-      className={classes.root}
-      noValidate
-      autoComplete="off"
-      onSubmit={handleSubmit}
-    >
-      <TextField
-        value={input}
-        onChange={e => setInput(e.target.value)}
-        id="outlined-basic"
-        label="Outlined"
-        variant="outlined"
-        fullWidth
-      />
-    </form>
+    <Paper elevation={3}>
+      <form
+        className={classes.root}
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit}
+      >
+        <TextField
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          id="outlined-basic"
+          label="List of things to do"
+          variant="outlined"
+          fullWidth
+        />
+      </form>
+    </Paper>
   );
 }
