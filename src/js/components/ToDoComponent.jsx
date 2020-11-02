@@ -26,23 +26,11 @@ const useStyles = makeStyles(theme => ({
 export default function ToDoComponent() {
   const classes = useStyles();
 
-  const initialValues = [
-    { content: "test here", id: "asdghheruiwrh", isCompleted: true },
-    { content: "another test", id: "asddghheruiwrh", isCompleted: false },
-    {
-      content: "and another one",
-      id: "asgdghheruiwrh",
-      isCompleted: false,
-    },
-  ];
+  const initVal = JSON.parse(
+    localStorage.getItem("AnotherToDoApp") || "[]"
+  );
 
-  const [todos, setTodos] = useState(initialValues);
-
-  useEffect(() => {
-    const list = JSON.parse(localStorage.getItem("AnotherToDoApp"));
-    list ? setTodos(list) : setTodos([]);
-    return () => {};
-  }, []);
+  const [todos, setTodos] = useState(initVal);
 
   useEffect(() => {
     localStorage.setItem("AnotherToDoApp", JSON.stringify(todos));
