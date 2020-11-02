@@ -36,43 +36,32 @@ export default function ToDoComponent() {
     },
   ];
 
-  const [state, setState] = useState({
-    todos: [...initialValues],
-    isOpen: false,
-  });
-
-  const { todos, isOpen } = state;
-
-  const [isComplete, setIsComplete] = useState(false);
+  const [todos, setState] = useState(initialValues);
 
   const toggleItem = id => {
-    const todos = state.todos.map(item =>
+    const newTodos = todos.map(item =>
       item.id === id ? { ...item, isCompleted: !item.isCompleted } : item
     );
-    setState(prevState => ({ ...prevState, todos }));
+    setState(newTodos);
   };
 
   const addItem = item => {
-    setState(prevState => {
-      const { todos } = prevState;
-      todos.push(item);
-      return { ...prevState, todos };
-    });
+    const newTodos = [...todos, item];
+    setState(newTodos);
   };
 
   const deleteItem = id => {
-    const todos = state.todos.filter(todo => todo.id !== id);
-    setState(prevState => ({ ...prevState, todos }));
+    const newTodos = todos.filter(todo => todo.id !== id);
+    setState(newTodos);
   };
 
   const editItem = editTodo => {
-    const todos = state.todos.map(todo =>
+    const newTodos = todos.map(todo =>
       editTodo.id === todo.id
         ? { ...todo, content: editTodo.content }
         : todo
     );
-
-    setState(prevState => ({ ...prevState, todos }));
+    setState(newTodos);
   };
 
   return (
