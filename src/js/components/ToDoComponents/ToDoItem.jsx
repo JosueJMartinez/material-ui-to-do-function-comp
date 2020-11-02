@@ -70,9 +70,8 @@ export default function ToDoItem({
       onClick={!toggleEditBtn ? () => toggleItem(id) : () => {}}
     >
       {toggleEditForm}
-
-      <ListItemSecondaryAction>
-        {!toggleEditBtn && (
+      {!toggleEditBtn && (
+        <ListItemSecondaryAction>
           <IconButton
             edge="start"
             aria-label="edit"
@@ -80,15 +79,16 @@ export default function ToDoItem({
           >
             <EditIcon />
           </IconButton>
-        )}
-        <IconButton
-          edge="end"
-          aria-label="delete"
-          onClick={() => deleteItem(id)}
-        >
-          <DeleteIcon />
-        </IconButton>
-      </ListItemSecondaryAction>
+
+          <IconButton
+            edge="end"
+            aria-label="delete"
+            onClick={() => deleteItem(id)}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </ListItemSecondaryAction>
+      )}
     </ListItem>
   );
 }
