@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Typography, AppBar, Toolbar, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -36,23 +36,34 @@ export default function ToDoComponent() {
     },
   ];
 
-  const [todos, setState] = useState(initialValues);
+  const [todos, setTodos] = useState(initialValues);
+
+  useEffect(() => {
+    const list = JSON.parse(localStorage.getItem("AnotherToDoApp"));
+    list ? setTodos(list) : setTodos([]);
+    return () => {};
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("AnotherToDoApp", JSON.stringify(todos));
+    return () => {};
+  }, [todos]);
 
   const toggleItem = id => {
     const newTodos = todos.map(item =>
       item.id === id ? { ...item, isCompleted: !item.isCompleted } : item
     );
-    setState(newTodos);
+    setTodos(newTodos);
   };
 
   const addItem = item => {
     const newTodos = [...todos, item];
-    setState(newTodos);
+    setTodos(newTodos);
   };
 
   const deleteItem = id => {
     const newTodos = todos.filter(todo => todo.id !== id);
-    setState(newTodos);
+    setTodos(newTodos);
   };
 
   const editItem = editTodo => {
@@ -61,7 +72,7 @@ export default function ToDoComponent() {
         ? { ...todo, content: editTodo.content }
         : todo
     );
-    setState(newTodos);
+    setTodos(newTodos);
   };
 
   return (
