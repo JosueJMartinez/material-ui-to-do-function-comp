@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Typography, AppBar, Toolbar, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -27,22 +27,13 @@ const useStyles = makeStyles(theme => ({
 export default function ToDoComponent() {
   const classes = useStyles();
 
-  const initVal = JSON.parse(
-    localStorage.getItem("AnotherToDoApp") || "[]"
-  );
-
   const {
     todos,
     addItem,
     deleteItem,
     toggleItem,
     editItem,
-  } = useTodoCompState(initVal);
-
-  useEffect(() => {
-    localStorage.setItem("AnotherToDoApp", JSON.stringify(todos));
-    return () => {};
-  }, [todos]);
+  } = useTodoCompState([]);
 
   return (
     <div className={classes.root}>

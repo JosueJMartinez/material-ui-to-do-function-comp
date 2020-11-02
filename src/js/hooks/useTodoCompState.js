@@ -1,7 +1,10 @@
-import { useState } from "react";
+import useLocalStorageState from "./useLocalStorageState";
 
 const useTodoCompState = initVal => {
-  const [todos, setTodos] = useState(initVal);
+  const [todos, setTodos] = useLocalStorageState(
+    "AnotherToDoApp",
+    initVal
+  );
 
   return {
     todos,
