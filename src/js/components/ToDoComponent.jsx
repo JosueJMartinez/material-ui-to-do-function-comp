@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Typography, AppBar, Toolbar } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
+import { Typography, AppBar, Toolbar, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import ToDoList from "./ToDoComponents/ToDoList";

@@ -8,17 +8,21 @@ const useStyles = makeStyles(theme => ({
   root: {},
 }));
 
-export default function EditToDo({ todo, editItem, handleEsc }) {
+export default function EditToDo({
+  todo,
+  editItem,
+  handleEsc,
+  setToggleEdit,
+}) {
   const classes = useStyles();
 
   const [input, setInput] = useInputState(todo.content);
 
   const handleSubmit = e => {
     e.preventDefault();
-
     todo = { ...todo, content: input };
-
     editItem(todo);
+    setToggleEdit();
   };
 
   return (

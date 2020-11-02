@@ -33,14 +33,10 @@ export default function ToDoItem({
   editItem,
 }) {
   const classes = useStyles(isCompleted);
+
   const labelId = `checkbox-list-label-${content}`;
 
   const [toggleEdit, setToggleEdit] = useToggleState();
-
-  const handleEditItem = editTodo => {
-    setToggleEdit();
-    editItem(editTodo);
-  };
 
   const handleEsc = e => {
     if (e.keyCode === 27) setToggleEdit();
@@ -55,8 +51,9 @@ export default function ToDoItem({
     <ListItemText>
       <EditToDo
         todo={{ content, id, isCompleted }}
-        editItem={handleEditItem}
+        editItem={editItem}
         handleEsc={handleEsc}
+        setToggleEdit={setToggleEdit}
       />
     </ListItemText>
   ) : (
