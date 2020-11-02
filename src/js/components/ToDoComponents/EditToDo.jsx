@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
   root: {},
 }));
 
-export default function EditToDo({ todo, editItem }) {
+export default function EditToDo({ todo, editItem, handleEsc }) {
   const classes = useStyles();
 
   const [input, setInput] = useInputState(todo.content);
@@ -32,9 +32,9 @@ export default function EditToDo({ todo, editItem }) {
         value={input}
         onChange={e => setInput(e.target.value)}
         id="outlined-basic"
-        // label="List of things to do"
         variant="outlined"
         fullWidth
+        onKeyDown={handleEsc}
       />
     </form>
   );

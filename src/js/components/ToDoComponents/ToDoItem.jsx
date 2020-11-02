@@ -35,18 +35,28 @@ export default function ToDoItem({
   const classes = useStyles(isCompleted);
   const labelId = `checkbox-list-label-${content}`;
 
-  const [toggleEditBtn, setToggleEditBtn] = useToggleState();
+  const [toggleEdit, setToggleEdit] = useToggleState();
 
   const handleEditItem = editTodo => {
-    setToggleEditBtn();
+    setToggleEdit();
     editItem(editTodo);
   };
 
-  const toggleEditForm = toggleEditBtn ? (
+  const handleEsc = e => {
+    if (e.keyCode === 27) setToggleEdit();
+  };
+
+  const handleEditToggle = e => {
+    e.stopPropagation();
+    setToggleEdit();
+  };
+
+  const toggleEditForm = toggleEdit ? (
     <ListItemText>
       <EditToDo
         todo={{ content, id, isCompleted }}
         editItem={handleEditItem}
+        handleEsc={handleEsc}
       />
     </ListItemText>
   ) : (
@@ -55,22 +65,17 @@ export default function ToDoItem({
     </ListItemText>
   );
 
-  const handleEditToggle = e => {
-    e.stopPropagation();
-    setToggleEditBtn();
-  };
-
   return (
     <ListItem
       className={classes.root}
       key={id}
       role={undefined}
       dense
-      button={!toggleEditBtn}
-      onClick={!toggleEditBtn ? () => toggleItem(id) : () => {}}
+      button={!toggleEdit}
+      onClick={!toggleEdit ? () => toggleItem(id) : () => {}}
     >
       {toggleEditForm}
-      {!toggleEditBtn && (
+      {!toggleEdit && (
         <ListItemSecondaryAction>
           <IconButton
             edge="start"
