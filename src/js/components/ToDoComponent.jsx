@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Typography, AppBar, Toolbar, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import ToDoList from "./ToDoComponents/ToDoList";
 import ToDoForm from "./ToDoComponents/ToDoForm";
+import useTodoCompState from "../hooks/useTodoCompState";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,38 +31,18 @@ export default function ToDoComponent() {
     localStorage.getItem("AnotherToDoApp") || "[]"
   );
 
-  const [todos, setTodos] = useState(initVal);
+  const {
+    todos,
+    addItem,
+    deleteItem,
+    toggleItem,
+    editItem,
+  } = useTodoCompState(initVal);
 
   useEffect(() => {
     localStorage.setItem("AnotherToDoApp", JSON.stringify(todos));
     return () => {};
   }, [todos]);
-
-  const toggleItem = id => {
-    const newTodos = todos.map(item =>
-      item.id === id ? { ...item, isCompleted: !item.isCompleted } : item
-    );
-    setTodos(newTodos);
-  };
-
-  const addItem = item => {
-    const newTodos = [...todos, item];
-    setTodos(newTodos);
-  };
-
-  const deleteItem = id => {
-    const newTodos = todos.filter(todo => todo.id !== id);
-    setTodos(newTodos);
-  };
-
-  const editItem = editTodo => {
-    const newTodos = todos.map(todo =>
-      editTodo.id === todo.id
-        ? { ...todo, content: editTodo.content }
-        : todo
-    );
-    setTodos(newTodos);
-  };
 
   return (
     <div className={classes.root}>
