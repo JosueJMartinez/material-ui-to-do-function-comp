@@ -1,5 +1,9 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  createMuiTheme,
+  ThemeProvider,
+} from "@material-ui/core/styles";
 import {
   ListItem,
   ListItemSecondaryAction,
@@ -23,6 +27,19 @@ const useStyles = makeStyles(theme => ({
     textDecoration: isCompleted => (isCompleted ? "line-through" : ""),
   },
 }));
+
+const theme = createMuiTheme({
+  overrides: {
+    // Style sheet name ⚛️
+    MuiTypography: {
+      // Name of the rule
+      body2: {
+        // Some CSS
+        fontSize: "1rem",
+      },
+    },
+  },
+});
 
 export default function ToDoItem({
   content,
@@ -57,9 +74,11 @@ export default function ToDoItem({
       />
     </ListItemText>
   ) : (
-    <ListItemText id={labelId} className={classes.listItemText}>
-      {content}
-    </ListItemText>
+    <ThemeProvider theme={theme}>
+      <ListItemText id={labelId} className={classes.listItemText}>
+        {content}
+      </ListItemText>
+    </ThemeProvider>
   );
 
   return (
