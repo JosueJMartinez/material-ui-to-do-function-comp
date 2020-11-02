@@ -67,13 +67,12 @@ export default function ToDoComponent() {
   };
 
   const editItem = editTodo => {
-    console.log("in the parent: ", editTodo);
     const todos = state.todos.map(todo =>
       editTodo.id === todo.id
         ? { ...todo, content: editTodo.content }
         : todo
     );
-    console.log("after editing: ", todos);
+
     setState(prevState => ({ ...prevState, todos }));
   };
 
