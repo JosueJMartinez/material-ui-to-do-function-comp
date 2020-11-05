@@ -1,20 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 
 import useInputState from "../../hooks/useInputState";
+import { ToDosContext } from "../../contexts/ToDosContext";
 
 const useStyles = makeStyles(theme => ({
   root: {},
 }));
 
-export default function EditToDo({
-  todo,
-  editItem,
-  handleEsc,
-  setToggleEdit,
-}) {
+export default function EditToDo({ todo, handleEsc, setToggleEdit }) {
   const classes = useStyles();
+  const { editItem } = useContext(ToDosContext);
 
   const [input, setInput] = useInputState(todo.content);
 

@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import ToDoList from "./ToDoComponents/ToDoList";
 import ToDoForm from "./ToDoComponents/ToDoForm";
-import useTodoCompState from "../hooks/useTodoCompState";
+import { ToDoProvider } from "../contexts/ToDosContext";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,14 +27,6 @@ const useStyles = makeStyles(theme => ({
 export default function ToDoComponent() {
   const classes = useStyles();
 
-  const {
-    todos,
-    addItem,
-    deleteItem,
-    toggleItem,
-    editItem,
-  } = useTodoCompState([]);
-
   return (
     <div className={classes.root}>
       <AppBar className={classes.appBar} color="primary" position="static">
@@ -53,13 +45,10 @@ export default function ToDoComponent() {
           lg={4}
           className={classes.mainComponent}
         >
-          <ToDoForm addItem={addItem} />
-          <ToDoList
-            todos={todos}
-            deleteItem={deleteItem}
-            toggleItem={toggleItem}
-            editItem={editItem}
-          />
+          <ToDoProvider>
+            <ToDoForm />
+            <ToDoList />
+          </ToDoProvider>
         </Grid>
       </Grid>
     </div>

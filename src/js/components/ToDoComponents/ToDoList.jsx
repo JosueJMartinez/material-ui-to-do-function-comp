@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { List, Paper, Typography } from "@material-ui/core";
 
 import ToDoItem from "./ToDoItem";
+import { ToDosContext } from "../../contexts/ToDosContext";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,25 +15,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ToDoList({
-  todos,
-  deleteItem,
-  toggleItem,
-  editItem,
-}) {
+export default function ToDoList() {
   const classes = useStyles();
+  const { todos } = useContext(ToDosContext);
 
   const listToDos = () => {
     return todos.map(item => {
-      return (
-        <ToDoItem
-          {...item}
-          key={item.id}
-          deleteItem={deleteItem}
-          toggleItem={toggleItem}
-          editItem={editItem}
-        />
-      );
+      return <ToDoItem {...item} key={item.id} />;
     });
   };
 

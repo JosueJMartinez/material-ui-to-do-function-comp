@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   makeStyles,
   createMuiTheme,
@@ -15,6 +15,7 @@ import EditIcon from "@material-ui/icons/Edit";
 
 import EditToDo from "./EditToDo";
 import useToggleState from "../../hooks/useToggleState";
+import { ToDosContext } from "../../contexts/ToDosContext";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -41,19 +42,13 @@ const theme = createMuiTheme({
   },
 });
 
-export default function ToDoItem({
-  content,
-  id,
-  isCompleted,
-  deleteItem,
-  toggleItem,
-  editItem,
-}) {
+export default function ToDoItem({ content, id, isCompleted }) {
   const classes = useStyles(isCompleted);
 
   const labelId = `checkbox-list-label-${content}`;
 
   const [toggleEdit, setToggleEdit] = useToggleState();
+  const { deleteItem, toggleItem } = useContext(ToDosContext);
 
   const handleEsc = e => {
     if (e.keyCode === 27) setToggleEdit();
@@ -68,7 +63,6 @@ export default function ToDoItem({
     <ListItemText>
       <EditToDo
         todo={{ content, id, isCompleted }}
-        editItem={editItem}
         handleEsc={handleEsc}
         setToggleEdit={setToggleEdit}
       />
