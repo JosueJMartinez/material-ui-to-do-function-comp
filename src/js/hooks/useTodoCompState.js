@@ -1,4 +1,4 @@
-import useLocalStorageState from "./useLocalStorageState";
+import { useLocalStorageState } from "./useLocalStorageReducer";
 
 const useTodoCompState = initVal => {
   const [todos, setTodos] = useLocalStorageState(
