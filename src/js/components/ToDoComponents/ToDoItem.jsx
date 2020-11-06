@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, memo } from "react";
 import {
   makeStyles,
   createMuiTheme,
@@ -42,7 +42,7 @@ const theme = createMuiTheme({
   },
 });
 
-export default function ToDoItem({ content, id, isCompleted }) {
+function ToDoItem({ content, id, isCompleted }) {
   const classes = useStyles(isCompleted);
 
   const labelId = `checkbox-list-label-${content}`;
@@ -75,6 +75,7 @@ export default function ToDoItem({ content, id, isCompleted }) {
     </ThemeProvider>
   );
 
+  console.log("todo render: ", content);
   return (
     <ListItem
       className={classes.root}
@@ -111,3 +112,5 @@ export default function ToDoItem({ content, id, isCompleted }) {
     </ListItem>
   );
 }
+
+export default memo(ToDoItem);

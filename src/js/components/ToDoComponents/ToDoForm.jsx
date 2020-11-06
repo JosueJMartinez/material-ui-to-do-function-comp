@@ -22,7 +22,7 @@ export default function ToDoForm() {
     dispatch({ type: "ADD-ITEM", item: newItem });
     reset();
   };
-  console.log("To Do Form render");
+
   return (
     <Paper elevation={3}>
       <form
