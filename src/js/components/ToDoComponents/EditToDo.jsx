@@ -11,17 +11,17 @@ const useStyles = makeStyles(theme => ({
 
 export default function EditToDo({ todo, handleEsc, setToggleEdit }) {
   const classes = useStyles();
-  const { editItem } = useContext(ToDosContext);
+  const { dispatch } = useContext(ToDosContext);
 
   const [input, setInput] = useInputState(todo.content);
 
   const handleSubmit = e => {
     e.preventDefault();
     todo = { ...todo, content: input };
-    editItem(todo);
+    dispatch({ type: "UPDATE-ITEM", updateTodo:todo });
     setToggleEdit();
   };
-
+  console.log("Edit todo form render");
   return (
     <form
       className={classes.root}

@@ -14,15 +14,15 @@ export default function ToDoForm() {
   const classes = useStyles();
 
   const [input, setInput, reset] = useInputState("");
-  const { addItem } = useContext(ToDosContext);
+  const { dispatch } = useContext(ToDosContext);
 
   const handleSubmit = e => {
     e.preventDefault();
     const newItem = { content: input, id: uuid(), isCompleted: false };
-    addItem(newItem);
+    dispatch({ type: "ADD-ITEM", item: newItem });
     reset();
   };
-
+  console.log("To Do Form render");
   return (
     <Paper elevation={3}>
       <form

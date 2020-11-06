@@ -48,7 +48,7 @@ export default function ToDoItem({ content, id, isCompleted }) {
   const labelId = `checkbox-list-label-${content}`;
 
   const [toggleEdit, setToggleEdit] = useToggleState();
-  const { deleteItem, toggleItem } = useContext(ToDosContext);
+  const { dispatch } = useContext(ToDosContext);
 
   const handleEsc = e => {
     if (e.keyCode === 27) setToggleEdit();
@@ -82,7 +82,11 @@ export default function ToDoItem({ content, id, isCompleted }) {
       role={undefined}
       dense
       button={!toggleEdit}
-      onClick={!toggleEdit ? () => toggleItem(id) : () => {}}
+      onClick={
+        !toggleEdit
+          ? () => dispatch({ type: "TOGGLE-ITEM", id })
+          : () => {}
+      }
     >
       {toggleEditForm}
       {!toggleEdit && (
@@ -98,7 +102,7 @@ export default function ToDoItem({ content, id, isCompleted }) {
           <IconButton
             edge="end"
             aria-label="delete"
-            onClick={() => deleteItem(id)}
+            onClick={() => dispatch({ type: "DELETE-ITEM", id })}
           >
             <DeleteIcon />
           </IconButton>
