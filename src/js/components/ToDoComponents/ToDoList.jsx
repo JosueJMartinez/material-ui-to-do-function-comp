@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function ToDoList() {
   const classes = useStyles();
-  const { todos } = useContext(ToDosContext);
+  const todos = useContext(ToDosContext);
 
   const listToDos = () => {
     return todos.map(item => {

@@ -15,7 +15,7 @@ import EditIcon from "@material-ui/icons/Edit";
 
 import EditToDo from "./EditToDo";
 import useToggleState from "../../hooks/useToggleState";
-import { ToDosContext } from "../../contexts/ToDosContext";
+import { DispatchToDosContext } from "../../contexts/ToDosContext";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -48,7 +48,7 @@ export default function ToDoItem({ content, id, isCompleted }) {
   const labelId = `checkbox-list-label-${content}`;
 
   const [toggleEdit, setToggleEdit] = useToggleState();
-  const { dispatch } = useContext(ToDosContext);
+  const dispatch = useContext(DispatchToDosContext);
 
   const handleEsc = e => {
     if (e.keyCode === 27) setToggleEdit();

@@ -3,7 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 
 import useInputState from "../../hooks/useInputState";
-import { ToDosContext } from "../../contexts/ToDosContext";
+import { DispatchToDosContext } from "../../contexts/ToDosContext";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -11,17 +11,17 @@ const useStyles = makeStyles(theme => ({
 
 export default function EditToDo({ todo, handleEsc, setToggleEdit }) {
   const classes = useStyles();
-  const { dispatch } = useContext(ToDosContext);
+  const dispatch = useContext(DispatchToDosContext);
 
   const [input, setInput] = useInputState(todo.content);
 
   const handleSubmit = e => {
     e.preventDefault();
     todo = { ...todo, content: input };
-    dispatch({ type: "UPDATE-ITEM", updateTodo:todo });
+    dispatch({ type: "UPDATE-ITEM", updateTodo: todo });
     setToggleEdit();
   };
-  console.log("Edit todo form render");
+
   return (
     <form
       className={classes.root}

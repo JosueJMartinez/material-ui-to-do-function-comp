@@ -4,7 +4,7 @@ import { TextField, Paper } from "@material-ui/core";
 import { v4 as uuid } from "uuid";
 
 import useInputState from "../../hooks/useInputState";
-import { ToDosContext } from "../../contexts/ToDosContext";
+import { DispatchToDosContext } from "../../contexts/ToDosContext";
 
 const useStyles = makeStyles(theme => ({
   root: { width: "100%" },
@@ -14,7 +14,7 @@ export default function ToDoForm() {
   const classes = useStyles();
 
   const [input, setInput, reset] = useInputState("");
-  const { dispatch } = useContext(ToDosContext);
+  const dispatch = useContext(DispatchToDosContext);
 
   const handleSubmit = e => {
     e.preventDefault();
