@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, AppBar, Toolbar, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import ToDoList from "./ToDoComponents/ToDoList";
@@ -12,9 +12,6 @@ const useStyles = makeStyles(theme => ({
     margin: "0",
     height: "100vh",
     backgroundColor: "#fafafa",
-  },
-  appBar: {
-    height: "64px",
   },
   mainComponent: {
     marginTop: "64px",
@@ -29,13 +26,6 @@ export default function ToDoComponent() {
 
   return (
     <div className={classes.root}>
-      <AppBar className={classes.appBar} color="primary" position="static">
-        <Toolbar>
-          <Typography color="inherit" variant="h4">
-            Oh No another list!!!
-          </Typography>
-        </Toolbar>
-      </AppBar>
       <Grid container justify="center">
         <Grid
           item
