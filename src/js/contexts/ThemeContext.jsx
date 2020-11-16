@@ -6,7 +6,7 @@ import { ThemeProvider } from "@material-ui/styles";
 export const ThemeContext = createContext();
 
 export function ThemeProviderCustom(props) {
-  const [isDarkMode, toggleIsDarkMode] = useToggleState(true);
+  const [isDarkMode, toggleIsDarkMode] = useToggleState(false);
 
   const theme = useMemo(
     () =>
