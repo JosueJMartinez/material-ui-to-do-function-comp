@@ -22,6 +22,7 @@ const useStyles = makeStyles({
 
 export default function ToDoComponent() {
   const classes = useStyles();
+  console.log("test");
 
   return (
     <div className={classes.root}>
