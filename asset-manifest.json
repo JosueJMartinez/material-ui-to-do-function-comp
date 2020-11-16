@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/material-ui-to-do-function-comp/static/css/main.323b9cff.chunk.css",
+    "main.js": "/material-ui-to-do-function-comp/static/js/main.fd25e494.chunk.js",
+    "main.js.map": "/material-ui-to-do-function-comp/static/js/main.fd25e494.chunk.js.map",
+    "runtime-main.js": "/material-ui-to-do-function-comp/static/js/runtime-main.78b71492.js",
+    "runtime-main.js.map": "/material-ui-to-do-function-comp/static/js/runtime-main.78b71492.js.map",
+    "static/js/2.27348438.chunk.js": "/material-ui-to-do-function-comp/static/js/2.27348438.chunk.js",
+    "static/js/2.27348438.chunk.js.map": "/material-ui-to-do-function-comp/static/js/2.27348438.chunk.js.map",
+    "static/js/3.912ad561.chunk.js": "/material-ui-to-do-function-comp/static/js/3.912ad561.chunk.js",
+    "static/js/3.912ad561.chunk.js.map": "/material-ui-to-do-function-comp/static/js/3.912ad561.chunk.js.map",
+    "index.html": "/material-ui-to-do-function-comp/index.html",
+    "static/css/main.323b9cff.chunk.css.map": "/material-ui-to-do-function-comp/static/css/main.323b9cff.chunk.css.map",
+    "static/js/2.27348438.chunk.js.LICENSE.txt": "/material-ui-to-do-function-comp/static/js/2.27348438.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.78b71492.js",
+    "static/js/2.27348438.chunk.js",
+    "static/css/main.323b9cff.chunk.css",
+    "static/js/main.fd25e494.chunk.js"
+  ]
+}
