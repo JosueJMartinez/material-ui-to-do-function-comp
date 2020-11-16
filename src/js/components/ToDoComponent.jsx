@@ -6,12 +6,11 @@ import ToDoList from "./ToDoComponents/ToDoList";
 import ToDoForm from "./ToDoComponents/ToDoForm";
 import { ToDoProvider } from "../contexts/ToDosContext";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   root: {
     padding: "0",
     margin: "0",
     height: "100vh",
-    backgroundColor: "#fafafa",
   },
   mainComponent: {
     marginTop: "64px",
@@ -19,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   todoTitle: {
     padding: "10px",
   },
-}));
+});
 
 export default function ToDoComponent() {
   const classes = useStyles();

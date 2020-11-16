@@ -1,14 +1,26 @@
-import React, { createContext } from "react";
+import React, { createContext, useMemo } from "react";
+import { createMuiTheme } from "@material-ui/core/styles";
 import useToggleState from "../hooks/useToggleState";
+import { ThemeProvider } from "@material-ui/styles";
 
 export const ThemeContext = createContext();
 
-export function ThemeProvider(props) {
+export function ThemeProviderCustom(props) {
   const [isDarkMode, toggleIsDarkMode] = useToggleState(true);
+
+  const theme = useMemo(
+    () =>
+      createMuiTheme({
+        palette: {
+          type: isDarkMode ? "dark" : "light",
+        },
+      }),
+    [isDarkMode]
+  );
 
   return (
     <ThemeContext.Provider value={{ isDarkMode, toggleIsDarkMode }}>
-      {props.children}
+      <ThemeProvider theme={theme}>{props.children}</ThemeProvider>
     </ThemeContext.Provider>
   );
 }

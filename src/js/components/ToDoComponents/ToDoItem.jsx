@@ -75,7 +75,6 @@ function ToDoItem({ content, id, isCompleted }) {
     </ThemeProvider>
   );
 
-  console.log("todo render: ", content);
   return (
     <ListItem
       className={classes.root}
